@@ -1,0 +1,26 @@
+#: Bot Configurations
+#: --------------------
+
+is_in_development_mode: True
+
+#: Default Configurations of Server
+DEFAULT_CONFIG:
+  prefix: "="
+
+
+# Register all your cogs here
+COGS:
+  - help
+  - server_status
+
+
+#: Database Configuration
+#: engine: must be 'filexdb' or 'mongodb'
+
+#: If you are using MongoDb, add 'MONGO_STRING' env variable in .env file
+#: Also change the 'engine' into 'mongodb'. That's it...
+DATABASE:
+  engine: filexdb
+  db: discord_bot
+  db_dir: data
+
