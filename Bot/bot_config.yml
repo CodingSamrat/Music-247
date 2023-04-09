@@ -8,10 +8,12 @@ DEFAULT_CONFIG:
   prefix: "="
 
 
-# Register all your cogs here
+#: Register all your cogs here
+#: Register the cog's filename not cog Class
 COGS:
   - help
   - server_status
+  - music
 
 
 #: Database Configuration
