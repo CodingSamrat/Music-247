@@ -20,8 +20,8 @@ class ServerStatus(commands.Cog):  # <- Change ->
     #:
     @commands.command()
     async def ping(self, ctx: Context):
-        latency = self.bot.latency * 1000
-        await ctx.send(f"Bot latency: `{latency}`")
+        latency = round(self.bot.latency * 1000)
+        await ctx.send(f"Bot latency: `{latency} ms`")
 
 
 async def setup(client):
