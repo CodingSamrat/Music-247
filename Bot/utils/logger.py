@@ -3,7 +3,7 @@ from colorama import Fore, Style
 
 
 class Alart:
-    DEBUG = "DEBUG"
+    INFO = "INFO"
     SUCCESS = "SUCCESS"
     WARNING = "WARNING"
     ERROR = "ERROR"
@@ -19,7 +19,7 @@ class LOG:
         # Check if text is empty
         if text:
             # Generating final string
-            final_msg = LOG.__get_final_msg(Alart.DEBUG, text)
+            final_msg = LOG.__get_final_msg(Alart.INFO, text)
 
             # Printing to the console
             print(final_msg)
@@ -78,9 +78,9 @@ class LOG:
         current_time = Fore.CYAN + Style.DIM + current_time + Style.NORMAL
 
         # Set Color for Alerts
-        if alert == Alart.DEBUG:
+        if alert == Alart.INFO:
             color = Fore.WHITE
-            final_msg = f"{current_time} {color + Style.BRIGHT} [{Alart.DEBUG}]{Style.NORMAL} {text}{Fore.WHITE}"
+            final_msg = f"{current_time} {color + Style.BRIGHT} [{Alart.INFO}]{Style.NORMAL} {text}{Fore.WHITE}"
         elif alert == Alart.SUCCESS:
             color = Fore.GREEN
             final_msg = f"{current_time} {color + Style.BRIGHT} [{Alart.SUCCESS}]{Style.NORMAL} {text}{Fore.WHITE}"
