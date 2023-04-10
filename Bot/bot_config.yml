@@ -12,8 +12,9 @@ DEFAULT_CONFIG:
 #: Register the cog's filename not cog Class
 COGS:
   - help
-  - server_status
+  - server_config
   - music
+  - status
 
 
 #: Database Configuration
