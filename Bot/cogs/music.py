@@ -3,11 +3,15 @@ from discord.ext.commands.context import Context
 
 from Bot.cogs.messages import music_help_message
 from discord import FFmpegPCMAudio
+from discord import utils
 
 from youtubesearchpython import VideosSearch
 from youtube_dl import YoutubeDL
 
+from Bot.database import Database
+from Bot.database import Collections
 from Bot.utils import LOG
+from Bot.config import CHANNEL
 
 FFMPEG_OPTIONS = {
     "executable": "vendor/ffmpeg/ffmpeg.exe",
@@ -99,9 +103,6 @@ class Music(commands.Cog):
 
                 source = FFmpegPCMAudio(url, **FFMPEG_OPTIONS)
 
-                #: Remove current playing song from queue
-                # self.queue.pop(0)
-
                 #: Play music
                 ctx.voice_client.play(source, after=lambda e: self._play_next_music(ctx))
                 self.is_playing = True
@@ -146,6 +147,31 @@ class Music(commands.Cog):
             await ctx.send(f"{msg}")
         except Exception as e:
             print(e)
+
+    @music.command(name="channel")
+    async def channel(self, ctx: Context, _channel_id: str = None):
+        channel_name = CHANNEL
+        channel_id = _channel_id
+        channel = None
+
+        #: Create channel
+        if channel_id is None:
+            await ctx.guild.create_text_channel(CHANNEL)
+            channel = utils.get(ctx.guild.channels, name=CHANNEL)
+            channel_id = str(channel.id)
+        #     pass
+        #
+        elif channel_id is not None:
+            channel = ctx.guild.get_channel(int(channel_id))
+            channel_name = ctx.guild.get_channel(int(channel_id)).name
+
+        music_obj = {
+            "channel_id": channel_id,
+            "channel_name": channel_name,
+            "queue": []
+        }
+        Database.update(Collections.GUILD, {"music": music_obj}, str(ctx.guild.id))
+        await ctx.send(f"Music channel setup Successful!\n Now visit {channel.mention} ...")
 
     @music.command(name="play", aliases=["p"])
     async def play(self, ctx: Context):

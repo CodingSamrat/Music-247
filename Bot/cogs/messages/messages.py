@@ -60,7 +60,8 @@ def music_help_message(prefix, guild_name, root_cmd):
 
         Command                 Descriptions
         -----------             ----------------
-        music, m                Shows this message [root]    
+        music, m                Shows this message [root]   
+        channel                 Created a channel for UI 
         play, p                 Play music
         pause, ps               Pause music
         stop, s                 Stop  music

@@ -14,4 +14,4 @@ driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), opti
 
 
 def get_yt_link():
-    driver.
+    driver = ""

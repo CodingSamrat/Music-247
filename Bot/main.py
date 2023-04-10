@@ -5,10 +5,11 @@ from dotenv import load_dotenv
 from discord.ext import commands
 from discord import Intents
 from discord import Guild
+from discord import utils
 
 # from Bot import __version__
 from Bot.utils import LOG
-from Bot.config import DEFAULT_CONFIG, COGS
+from Bot.config import DEFAULT_CONFIG, COGS, CHANNEL
 from Bot.database import Database
 from Bot.database import Collections
 
@@ -34,7 +35,12 @@ def get_server_prefix(bot, message) -> str:
             "_id": guild_id,
             "guild_name": guild_name,
             "in_guild": True,
-            "config": DEFAULT_CONFIG
+            "config": DEFAULT_CONFIG,
+            "music": {
+                "channel_id": "",
+                "channel_name": "",
+                "queue": [],
+            }
         }
 
         # col_guild.insert(server_data)
@@ -83,12 +89,21 @@ async def on_guild_join(guild: Guild):
         Database.update(Collections.GUILD, {"in_guild": in_guild}, guild_id)
 
     else:
+        #: Create channel
+        await guild.create_text_channel(CHANNEL)
+        channel = utils.get(guild.channels, name=CHANNEL)
+
         #: Insert Data into database
         server_data = {
             "_id": guild_id,
             "guild_name": guild_name,
             "in_guild": in_guild,
-            "config": config
+            "config": config,
+            "music": {
+                "channel_id": str(channel.id),
+                "channel_name": channel.name,
+                "queue": [],
+            }
         }
 
         #: writing to database

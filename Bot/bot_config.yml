@@ -27,3 +27,4 @@ DATABASE:
   db: discord_bot
   db_dir: data
 
+CHANNEL: 'music-247-bot'
