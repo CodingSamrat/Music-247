@@ -11,10 +11,10 @@ DEFAULT_CONFIG:
 #: Register all your cogs here
 #: Register the cog's filename not cog Class
 COGS:
-  - help
   - server_config
+  - status'
+  - help
   - music
-  - status
 
 
 #: Database Configuration
@@ -27,4 +27,4 @@ DATABASE:
   db: discord_bot
   db_dir: data
 
-CHANNEL: 'music-247-bot'
+CHANNEL: 'dj-wala-babu'
